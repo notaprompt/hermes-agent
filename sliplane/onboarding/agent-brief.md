@@ -66,9 +66,11 @@ Each cron entry should invoke this brief plus the loop-specific prompt:
 1. Write proposal to `/opt/data/workspace/proposals/{tech|business}/YYYY-MM-DD-<slug>.md`
 2. Commit: `git add proposals/ && git commit -m "prd({loop}): <slug>"`
 3. Push: `git push origin main`
-4. ntfy: `curl -d "new PRD: <slug>" ntfy.sh/$NTFY_TOPIC`
+4. Post to Google Chat home channel via the `google_chat` toolset:
+   - Message format: `*<loop>* PRD — <slug>` followed by the GitHub link to the file
+   - For acquisition leads in business loop: prefix with `🎯` (the one place an emoji is load-bearing — visual triage for time-sensitive leads)
 
-(GITHUB_TOKEN is in env; ntfy topic is in env as NTFY_TOPIC.)
+(GITHUB_TOKEN is in env; Google Chat is configured at the platform level.)
 
 ## Sovereignty constraints (NON-NEGOTIABLE)
 

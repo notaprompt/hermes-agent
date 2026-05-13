@@ -79,12 +79,12 @@ For each: capture username, post URL, post date, what they're looking for, their
 - **Competitor moves / threats / angles** → PRD if material, status note if minor
 
 At end of cycle:
-- Commit + push + ntfy
+- Commit + push + Google Chat post to "Reframed Ops" space
 
 ## Honest stop conditions
 
 - 20 min max per cycle.
-- Acquisition lead found → priority-1 ntfy (use `priority:high` flag).
+- Acquisition lead found → priority-1 Google Chat post (prefix with 🎯).
 - If today's competitor-blog scan shows nothing new from any of the top 5, that's fine — note it.
 - If you find an acquisition lead but their post is >48h old and unresponded, lower priority but still surface.
 
