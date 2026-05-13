@@ -1,0 +1,32 @@
+# Local-testing docker-compose for the Sliplane build.
+# Sliplane itself does NOT use docker-compose — it builds the Dockerfile directly.
+# This file is for local smoke-tests before pushing to Sliplane.
+#
+# Usage (local):
+#   cp .env.example .env  # fill in OPENROUTER_API_KEY, GITHUB_TOKEN, NTFY_TOPIC
+#   docker compose -f sliplane/docker-compose.sliplane.yml up --build
+
+services:
+  hermes-researcher:
+    build:
+      context: ..
+      dockerfile: sliplane/Dockerfile
+    image: hermes-researcher:local
+    container_name: hermes-researcher
+    restart: unless-stopped
+    # Bridge networking (NOT host) — Sliplane-compatible
+    ports:
+      - "127.0.0.1:9119:9119"  # dashboard only on localhost when running locally
+    volumes:
+      - hermes-data:/opt/data
+    environment:
+      - HERMES_UID=${HERMES_UID:-10000}
+      - HERMES_GID=${HERMES_GID:-10000}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - NTFY_TOPIC=${NTFY_TOPIC}
+    command: ["gateway", "run"]
+
+volumes:
+  hermes-data:
+    driver: local
