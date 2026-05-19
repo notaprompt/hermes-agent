@@ -1,0 +1,63 @@
+# Hermes researcher — Sliplane deploy config
+# Substrate-for-Reframed alignment per 2026-05-08 design.
+
+model:
+  default: "moonshotai/kimi-k2.6"
+  provider: "openrouter"
+  base_url: "https://openrouter.ai/api/v1"
+  # Reasoning model — generous max_tokens so thinking + output both fit.
+  max_tokens: 8192
+
+# Route via OpenRouter; prefer Moonshot upstream when available.
+openrouter:
+  response_cache: true
+  response_cache_ttl: 600
+
+provider_routing:
+  sort: "throughput"
+  data_collection: "deny"
+
+terminal:
+  backend: "local"
+  cwd: "/opt/data/workspace"
+  timeout: 300
+  lifetime_seconds: 600
+
+# Browser tooling — built-in Playwright + browser-harness external skill
+browser:
+  inactivity_timeout: 300
+
+skills:
+  external_directories:
+    - "/opt/hermes/skills/external/browser-harness"
+  nudge_creation: false  # don't auto-extract skills until we trust the agent
+
+agent:
+  max_iterations: 60
+  reasoning_effort: "high"  # this is a research scout — thinking is the point
+
+delegation:
+  max_concurrent_children: 3
+  max_spawn_depth: 2
+  subagent_auto_approve: false
+
+# Pull from curated sources rather than crawling raw arXiv ourselves
+# (per the 2026-05-11 scan finding — VoltAgent + tmgthb already do this work)
+tool_loop_guardrails:
+  warn_after_iterations: 30
+  hard_stop_iterations: 80
+
+compression:
+  enabled: true
+  threshold: 0.85
+
+privacy:
+  redact_pii: true
+
+display:
+  bell_on_idle: false
+  streaming: true
+
+# v1 deploy: no messaging integration. PRDs land via git push to GitHub.
+# Founder reviews via GitHub mobile app push notifications (free) or by checking
+# the repo. Add Telegram/Google Chat in a v2 polish pass if cadence demands it.
