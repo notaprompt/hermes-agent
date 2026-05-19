@@ -26,13 +26,9 @@ This Dockerfile (`sliplane/Dockerfile`) builds from repo root. Sliplane will clo
 6. Environment variables (use Sliplane's encrypted env, not committed):
    - `OPENROUTER_API_KEY` — from `~/forge-ops/keys/sliplane-hermes-researcher` (the `openrouter:` line)
    - `GITHUB_TOKEN` — from same keyfile (`github-token:` line) — currently gh CLI token
-   - `GOOGLE_CHAT_PROJECT_ID` — your GCP project ID
-   - `GOOGLE_CHAT_SUBSCRIPTION_NAME` — `projects/<project-id>/subscriptions/hermes-chat-subscription`
-   - `GOOGLE_CHAT_SERVICE_ACCOUNT_JSON` — `/opt/data/secrets/gchat-sa.json` (path inside container)
-   - `GOOGLE_CHAT_ALLOWED_USERS` — your @reframed.works email
-   - `GOOGLE_CHAT_HOME_CHANNEL_NAME` — `Reframed Ops` (must match the space name created in Google Chat)
    - `HERMES_UID=10000`, `HERMES_GID=10000` (Hermes default)
-7. **Secret file mount:** upload `gchat-sa.json` to Sliplane and mount at `/opt/data/secrets/gchat-sa.json` (Sliplane has secret-file support in dashboard)
+
+That's the entire env config for v1. Three vars + two defaults. PRDs land on GitHub via push.
 7. Resource tier: 3 vCPU / 4GB / 80GB (€9 base) — sufficient for Playwright + Chromium + Hermes
 
 ### 3. First boot

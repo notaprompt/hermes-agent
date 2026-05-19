@@ -44,7 +44,7 @@ For each potentially-interesting finding, ask:
 3. If no → log it in your memory but don't surface it
 
 At end of cycle:
-- If you drafted ≥1 PRD: commit + push + Google Chat post to "Reframed Ops" space
+- If you drafted ≥1 PRD: `git commit` + `git push origin main` (GitHub is the sole publish surface in v1)
 - If you drafted 0 PRDs: write a `proposals/status/YYYY-MM-DD-tech.md` status update
 
 ## Honest stop conditions

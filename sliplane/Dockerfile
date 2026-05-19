@@ -66,9 +66,6 @@ RUN chmod -R a+rX /opt/hermes && \
 
 RUN uv pip install --no-cache-dir --no-deps -e "."
 
-# Google Chat dependencies (Hermes ships the integration but pubsub libs aren't in [all])
-RUN uv pip install --no-cache-dir google-cloud-pubsub google-api-python-client google-auth
-
 # ---- Sliplane-specific additions ----
 
 # Install browser-harness as an external skill (self-healing browser actions)
